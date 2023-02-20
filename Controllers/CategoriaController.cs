@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Poj.Context;
 using Poj.Models;
+using Projecto_vendas.Models.DTO;
+using Projecto_vendas.Models;
+
 namespace Poj.Controllers
 {
     
@@ -25,14 +28,15 @@ namespace Poj.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCategoria (string Categoria)
-        {
-            Categoria cat = new Categoria();
-            cat.Nome = Categoria;
-
-            _context.Add(cat);
+        public IActionResult CreateCategoria (string dados)
+        { 
+           
+            Categoria categoria = new Categoria();
+            categoria.Nome = dados;
+          
+            _context.Add(categoria);
             _context.SaveChanges();
-            return Ok(cat);
+            return Ok(categoria);
         }
 
         [HttpGet("{id}")]
@@ -45,7 +49,7 @@ namespace Poj.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCategoria (Guid id,Categoria categoria)
+        public IActionResult UpdateCategoria (Guid id,CategoriaRequest categoria)
         {
             var CategoriaBanco = _context.Categorias.Find(id);
           if(CategoriaBanco ==null) return NotFound();

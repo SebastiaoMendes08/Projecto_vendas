@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Poj.Models;
+using Projecto_vendas.Models;
 
 namespace Poj.Context
 {
@@ -15,5 +16,6 @@ namespace Poj.Context
         }
 
         public DbSet<Categoria> Categorias {get;set;}
+         public DbSet<Produto> Produtos {get;set;}
     }
 }
