@@ -23,5 +23,9 @@ namespace Projecto_vendas.Models.DTO
                public string? Nome {get;set;}
     }
 
+    public class  ClienteRequest{
+        public string? Nome {get;set;}
+    }
+
     
 }

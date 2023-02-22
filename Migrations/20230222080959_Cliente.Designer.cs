@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Poj.Context;
 
@@ -10,9 +11,11 @@ using Poj.Context;
 namespace Poj.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230222080959_Cliente")]
+    partial class Cliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias", (string)null);
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Cliente", b =>
@@ -44,7 +47,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Produto", b =>
@@ -67,55 +70,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos", (string)null);
-                });
-
-            modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("ClienteId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("NumVenda")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ProdutoId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("Vendas", (string)null);
-                });
-
-            modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>
-                {
-                    b.HasOne("Projecto_vendas.Models.Cliente", null)
-                        .WithMany("vendas")
-                        .HasForeignKey("ClienteId");
-
-                    b.HasOne("Projecto_vendas.Models.Produto", null)
-                        .WithMany("vendas")
-                        .HasForeignKey("ProdutoId");
-                });
-
-            modelBuilder.Entity("Projecto_vendas.Models.Cliente", b =>
-                {
-                    b.Navigation("vendas");
-                });
-
-            modelBuilder.Entity("Projecto_vendas.Models.Produto", b =>
-                {
-                    b.Navigation("vendas");
+                    b.ToTable("Produtos");
                 });
 #pragma warning restore 612, 618
         }

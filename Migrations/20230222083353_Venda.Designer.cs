@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Poj.Context;
 
@@ -10,9 +11,11 @@ using Poj.Context;
 namespace Poj.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230222083353_Venda")]
+    partial class Venda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias", (string)null);
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Cliente", b =>
@@ -44,7 +47,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Produto", b =>
@@ -67,7 +70,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos", (string)null);
+                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>
@@ -94,7 +97,7 @@ namespace Poj.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("Vendas", (string)null);
+                    b.ToTable("Vendas");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>

@@ -34,8 +34,6 @@ namespace Projecto_vendas.Controllers
           return Ok(produtos);
         }
         
-
-
         [HttpPost]
         public IActionResult CreateProduto (ProdutoResquest resquest)
         {
