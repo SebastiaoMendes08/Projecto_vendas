@@ -10,7 +10,5 @@ namespace Projecto_vendas.Models
        public Guid Id { get; set; } = new Guid();
 
        public string?  Nome { get; set; }
-
-       public ICollection<Venda>? vendas {get;set;}
     }
 }
