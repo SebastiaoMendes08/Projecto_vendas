@@ -11,8 +11,8 @@ using Poj.Context;
 namespace Poj.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230222080959_Cliente")]
-    partial class Cliente
+    [Migration("20230222095406_database")]
+    partial class database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,69 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
                     b.ToTable("Produtos");
+                });
+
+            modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("ClienteId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("NumVenda")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ProdutoId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("Vendas");
+                });
+
+            modelBuilder.Entity("Projecto_vendas.Models.Produto", b =>
+                {
+                    b.HasOne("Poj.Models.Categoria", null)
+                        .WithMany("vendas")
+                        .HasForeignKey("CategoriaId");
+                });
+
+            modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>
+                {
+                    b.HasOne("Projecto_vendas.Models.Cliente", null)
+                        .WithMany("vendas")
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("Projecto_vendas.Models.Produto", null)
+                        .WithMany("vendas")
+                        .HasForeignKey("ProdutoId");
+                });
+
+            modelBuilder.Entity("Poj.Models.Categoria", b =>
+                {
+                    b.Navigation("vendas");
+                });
+
+            modelBuilder.Entity("Projecto_vendas.Models.Cliente", b =>
+                {
+                    b.Navigation("vendas");
+                });
+
+            modelBuilder.Entity("Projecto_vendas.Models.Produto", b =>
+                {
+                    b.Navigation("vendas");
                 });
 #pragma warning restore 612, 618
         }

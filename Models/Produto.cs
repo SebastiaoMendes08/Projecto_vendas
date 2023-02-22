@@ -21,8 +21,5 @@ namespace Projecto_vendas.Models
        [ForeignKey("Categoria")]
        public Guid? CategoriaId {get;set;}
 
-       public ICollection<Venda>? vendas {get;set;}
-
-
     }
 }

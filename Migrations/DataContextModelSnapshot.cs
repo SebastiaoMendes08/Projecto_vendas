@@ -30,7 +30,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias", (string)null);
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Cliente", b =>
@@ -44,7 +44,7 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Produto", b =>
@@ -67,7 +67,9 @@ namespace Poj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos", (string)null);
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>
@@ -94,7 +96,14 @@ namespace Poj.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("Vendas", (string)null);
+                    b.ToTable("Vendas");
+                });
+
+            modelBuilder.Entity("Projecto_vendas.Models.Produto", b =>
+                {
+                    b.HasOne("Poj.Models.Categoria", null)
+                        .WithMany("vendas")
+                        .HasForeignKey("CategoriaId");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Venda", b =>
@@ -106,6 +115,11 @@ namespace Poj.Migrations
                     b.HasOne("Projecto_vendas.Models.Produto", null)
                         .WithMany("vendas")
                         .HasForeignKey("ProdutoId");
+                });
+
+            modelBuilder.Entity("Poj.Models.Categoria", b =>
+                {
+                    b.Navigation("vendas");
                 });
 
             modelBuilder.Entity("Projecto_vendas.Models.Cliente", b =>
